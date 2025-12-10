@@ -28,19 +28,63 @@ However, the remaining flip-flops should be made ready to toggle only when all l
 
 **Procedure**
 
-/* write all the steps invloved */
+1.Use T flip-flops with common clock.
+
+2.Set T inputs:
+
+     *T0 = 1
+
+     *T1 = Q0
+
+     *T2 = Q0·Q1
+
+     *T3 = Q0·Q1·Q2
+
+3.Give clock pulses → all FFs trigger simultaneously.
+
+4.Flip-flops toggle based on T inputs.
+
+5.Counter output increases in binary order (0000 → 1111).
 
 **PROGRAM**
 
-/* Program for flipflops and verify its truth table in quartus using Verilog programming. 
+module Co_ud (
+    input  wire clk,       // clock input
+    input  wire rst,       // synchronous reset
+	 input  wire d,
+    output reg  [2:0] q   // 3-bit counter output
+);
 
-Developed by: RegisterNumber:
-*/
+initial begin
+     q <= 3'b0000;
+	 end
+
+always @(posedge clk) 
+begin
+q <= 3'b000;
+    if (rst) 
+        q <= 3'b000;       // reset counter to 0
+    else if(d)
+        q <= q + 1;        // increment counter
+		  else
+		  q <= q - 1;
+end
+
+endmodule
+
+Developed by:DHANAVISHNI M
+RegisterNumber:25016333
 
 **RTL LOGIC UP COUNTER**
+<img width="1920" height="1080" alt="Screenshot (128)" src="https://github.com/user-attachments/assets/3306f217-7585-46a6-8e3e-4144294790cc" />
+
 
 **TIMING DIAGRAM FOR IP COUNTER**
+<img width="1920" height="1080" alt="Screenshot (129)" src="https://github.com/user-attachments/assets/0c417943-05f3-43c5-bbef-a8b03e97aa3e" />
+
 
 **TRUTH TABLE**
 
 **RESULTS**
+
+Thus the sychronous-up-counter using verilog and validating their functionality using their functional tables is verified.
